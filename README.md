@@ -1,7 +1,7 @@
 # Databricks AI RAG Batch processing
 
-Application of generative AI has become more diverse. Simple chatbot RAG pattern is compemented by other scenarios. 
-One of the patterns is processing large amounts of data using multiple requests to GenAI model. 
+Application of generative AI has become more diverse. Simple chatbot RAG pattern is complemented by other scenarios. 
+One of the emerged patterns is processing large amounts of data using multiple requests to GenAI model. 
 For example large volume of data legal or scientific documents can be processed in batch mode to extract relevant information as pertains to each document.
 This information would be stored in a database for further processing.
 
@@ -11,6 +11,17 @@ In this case in Databricks onse could use user-defined functions to process data
 Each user-defined function is a RAG chain. 
 
 ```python
+# Define a list of sample questions for an LLM
+questions = [
+    "Responsibilities of Director of Operations?",
+    "Responsibilities of Senior Manager Human resources?",
+    "Responsibilities of Directory of Chief Financial Officer?"
+]
+
+questions_df = spark.createDataFrame(
+    [Row(question= q) for q in questions]
+)
+
 # Define the UDF to get chat completions
 def call_chain(question):
     template = """
