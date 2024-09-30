@@ -1,0 +1,30 @@
+tables_config:
+  poc_location_base: abfss://data01@xxxxdata01.dfs.core.windows.net/ragpocdata01
+  rag_poc_catalog: rag_poc_catalog
+  rag_poc_schema: rag_poc_schema
+  volume_name: ragpocvolume01
+  raw_delta_name: rag_poc_deltaraw03
+  parsed_delta_name: rag_poc_deltaparsed03
+  delta_name: rag_poc_delta03
+
+pipeline_config:
+  chunker:
+    config:
+      chunk_overlap_tokens: 256
+      chunk_size_tokens: 1024
+    name: langchain_recursive_char
+  
+vector_search_config:  
+  pipeline_type: TRIGGERED
+  vector_search_endpoint_name: rag_poc_vector_search_endpoint
+  vector_index_name: rag_poc_vector_search_index03
+
+genai_config:  
+  model_name: gpt-4o 
+
+embedding_config:
+  embedding_service_endpoint: embedding_service_endpoint
+  embedding_endpoint_name: bge_m3
+  embedding_tokenizer:
+    tokenizer_model_name: BAAI/bge-m3
+    tokenizer_source: hugging_face  
